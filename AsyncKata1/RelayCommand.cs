@@ -6,6 +6,7 @@ namespace AsyncKata1
     public class RelayCommand : ICommand
     {
         // Comment added by HANH
+        // One more comment
 
 
         private readonly Action<object> m_Execute;
