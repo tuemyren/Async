@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.IO.Pipes;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Windows.Input;
 using WorkerLibrary;
 
@@ -44,6 +45,7 @@ namespace AsyncKata1
         {
             WorkOngoing = true;
             StatusMessage = "Work ongoing";
+            Thread.Sleep(0);
             m_Worker.DoWork();
             StatusMessage = "Work done!";
             WorkOngoing = false;
