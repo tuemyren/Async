@@ -17,8 +17,11 @@ namespace WorkerLibrary
             var t = new Task(() =>
             {
                 Thread.Sleep(5000);
-                finalize?.Invoke();
+                //finalize?.Invoke();
             });
+            t.ContinueWith(
+                    x => finalize?.Invoke(),
+                    TaskScheduler.FromCurrentSynchronizationContext());
             t.Start();
         }
     }
