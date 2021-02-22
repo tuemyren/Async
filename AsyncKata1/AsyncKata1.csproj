@@ -99,5 +99,11 @@
   <ItemGroup>
     <Resource Include="Nlw.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WorkerLibrary\WorkerLibrary.csproj">
+      <Project>{187b4779-f8ca-44ab-9bf5-8aab5269f996}</Project>
+      <Name>WorkerLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

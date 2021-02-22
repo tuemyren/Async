@@ -7,8 +7,8 @@ namespace AsyncKata1
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
-            var mainWindowViewModel = new MainWindowViewModel();
+            var worker = new WorkerLibrary.Worker();
+            var mainWindowViewModel = new MainWindowViewModel(worker);
 
             var mainWindow = new MainWindow();
             mainWindow.DataContext = mainWindowViewModel;

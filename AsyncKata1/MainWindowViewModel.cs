@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
+using System.IO.Pipes;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using WorkerLibrary;
 
 namespace AsyncKata1
 {
@@ -8,9 +10,11 @@ namespace AsyncKata1
     {
         private bool m_WorkOngoing;
         private string m_StatusMessage;
+        private IWorker m_Worker;
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(IWorker worker)
         {
+            m_Worker = worker;
             StartStopCommand = new RelayCommand(StartStopCommandExecute);
         }
 
@@ -38,9 +42,11 @@ namespace AsyncKata1
 
         private void StartStopCommandExecute(object obj)
         {
-            WorkOngoing = !WorkOngoing;
-
-            StatusMessage = WorkOngoing ? "Work ongoing" : "Work done";
+            WorkOngoing = true;
+            StatusMessage = "Work ongoing";
+            m_Worker.DoWork();
+            StatusMessage = "Work done!";
+            WorkOngoing = false;
         }
 
         #region PropertyChanged
