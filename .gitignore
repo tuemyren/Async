@@ -1,3 +1,6 @@
 *.g.*
 AsyncKata1/obj/*
 .vs/AsyncKata1/v15/*
+*.exe
+*.dll
+*.pdb
