@@ -14,7 +14,7 @@ namespace WorkerLibrary
     {
         public async Task<string> DoWork(CancellationToken cancellationToken)
         {
-            return await BackgroundWorker(cancellationToken);
+            return await BackgroundWorker(cancellationToken).ConfigureAwait(false);
         }
         private static Task<string> BackgroundWorker(CancellationToken cancellationToken)
         {

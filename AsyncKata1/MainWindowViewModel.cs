@@ -41,13 +41,28 @@ namespace AsyncKata1
             }
         }
 
+
+        private CancellationTokenSource m_Cancel;
+
         private async void StartStopCommandExecute(object obj)
         {
+            if (WorkOngoing)
+            {
+                // Make sure cancel hasn't already been requested
+                if (m_Cancel is null || m_Cancel.IsCancellationRequested)
+                {
+                    return;
+                }
+
+                m_Cancel.Cancel(); // Cancel the DoWork() Task
+                return;
+            }
+
             WorkOngoing = true;
+            m_Cancel = new CancellationTokenSource();
             StatusMessage = "Work ongoing";
-
-            StatusMessage = await m_Worker.DoWork();
-
+            StatusMessage = await m_Worker.DoWork(m_Cancel.Token);
+            m_Cancel?.Dispose();
             WorkOngoing = false;
         }
 
