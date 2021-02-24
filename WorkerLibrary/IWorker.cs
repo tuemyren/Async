@@ -10,11 +10,16 @@ namespace WorkerLibrary
         Task DoWork();
     }
 
-    public class Worker : IWorker   
+    public class Worker : IWorker
     {
-        public Task DoWork()
+        public async Task DoWork()
+        {
+            await BackgroundWorker();
+        }
+        private static Task BackgroundWorker()
         {
             return Task.Run(() => Thread.Sleep(5000));
         }
     }
+
 }

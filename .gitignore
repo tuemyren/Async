@@ -7,3 +7,4 @@ WorkerLibrary/bin/*
 *.exe
 *.dll
 *.pdb
+.vs/AsyncKata1/DesignTimeBuild/.dtbcache
