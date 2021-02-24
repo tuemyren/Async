@@ -20,7 +20,7 @@ namespace WorkerLibrary
         {
             return Task.Run(() =>
             {
-                var count = 0;
+                var count = 0; 
                 while (count < 10)
                 {
                     if (cancellationToken.IsCancellationRequested)

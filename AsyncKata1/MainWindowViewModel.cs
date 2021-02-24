@@ -57,7 +57,7 @@ namespace AsyncKata1
                 m_Cancel.Cancel(); // Cancel the DoWork() Task
                 return;
             }
-
+             
             WorkOngoing = true;
             m_Cancel = new CancellationTokenSource();
             StatusMessage = "Work ongoing";
