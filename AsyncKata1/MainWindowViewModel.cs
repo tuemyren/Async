@@ -46,9 +46,8 @@ namespace AsyncKata1
             WorkOngoing = true;
             StatusMessage = "Work ongoing";
 
-            await m_Worker.DoWork();
+            StatusMessage = await m_Worker.DoWork();
 
-            StatusMessage = "Work done!";
             WorkOngoing = false;
         }
 
