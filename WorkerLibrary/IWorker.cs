@@ -7,22 +7,14 @@ namespace WorkerLibrary
 {
     public interface IWorker
     {
-        void DoWork(Action finalize);
+        Task DoWork();
     }
 
     public class Worker : IWorker   
     {
-        public void DoWork(Action finalize)
+        public Task DoWork()
         {
-            var t = new Task(() =>
-            {
-                Thread.Sleep(5000);
-                //finalize?.Invoke();
-            });
-            t.ContinueWith(
-                    x => finalize?.Invoke(),
-                    TaskScheduler.FromCurrentSynchronizationContext());
-            t.Start();
+            return Task.Run(() => Thread.Sleep(5000));
         }
     }
 }

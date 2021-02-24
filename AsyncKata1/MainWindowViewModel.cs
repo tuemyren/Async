@@ -41,17 +41,15 @@ namespace AsyncKata1
             }
         }
 
-        private void FinalizeWork()
-        {
-            StatusMessage = "Work done!";
-            WorkOngoing = false;
-        }
-
-        private void StartStopCommandExecute(object obj)
+        private async void StartStopCommandExecute(object obj)
         {
             WorkOngoing = true;
             StatusMessage = "Work ongoing";
-            m_Worker.DoWork(FinalizeWork);
+
+            await m_Worker.DoWork();
+
+            StatusMessage = "Work done!";
+            WorkOngoing = false;
         }
 
         #region PropertyChanged
