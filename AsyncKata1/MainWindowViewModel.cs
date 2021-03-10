@@ -1,7 +1,9 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.IO.Pipes;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using WorkerLibrary;
 
@@ -24,10 +26,25 @@ namespace AsyncKata1
 
         public ICommand CrashCommand { get; }
 
-        private void CrashCommandExecute(object obj)
+        private async void CrashCommandExecute(object obj)
         {
+            Task t;
+            try
+            {
+                t = JobThatThrows();
+                await t;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            
         }
 
+        private async Task JobThatThrows()
+        {
+            await Task.Run(() => throw new Exception("Big explosion"));
+        }
 
 
         public bool WorkOngoing
