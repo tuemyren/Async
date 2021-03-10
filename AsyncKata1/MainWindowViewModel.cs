@@ -17,9 +17,18 @@ namespace AsyncKata1
         {
             m_Worker = worker;
             StartStopCommand = new RelayCommand(StartStopCommandExecute);
+            CrashCommand = new RelayCommand(CrashCommandExecute);
         }
 
         public ICommand StartStopCommand { get; }
+
+        public ICommand CrashCommand { get; }
+
+        private void CrashCommandExecute(object obj)
+        {
+        }
+
+
 
         public bool WorkOngoing
         {

@@ -92,6 +92,12 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Stretch"
                 Content="{Binding StatusMessage}"/>
+            <Button 
+                Grid.Column="0"
+                Grid.Row="1"
+                Content="Crash" 
+                Command="{Binding CrashCommand}"
+                Width="75"/>
         </Grid>
     </Grid>
 </Window>
