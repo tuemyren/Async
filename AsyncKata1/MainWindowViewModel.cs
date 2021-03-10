@@ -28,24 +28,34 @@ namespace AsyncKata1
 
         private async void CrashCommandExecute(object obj)
         {
-            Task t;
+            Task t, t2, all;
             try
             {
                 t = JobThatThrows();
-                await t;
+                t2 = JobThatsNotSupported();
+                all = Task.WhenAll(t2, t);
+                await all;
+            }
+            catch (AggregateException ae)
+            {
+                Console.WriteLine(ae);
+                Console.WriteLine(ae.Message);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e);
             }
-            
         }
 
         private async Task JobThatThrows()
         {
-            await Task.Run(() => throw new Exception("Big explosion"));
+            await Task.Run(() => throw new IndexOutOfRangeException("Index out of range!"));
         }
 
+        private async Task JobThatsNotSupported()
+        {
+            await Task.Run(() => throw new NotSupportedException("NotSupported"));
+        }
 
         public bool WorkOngoing
         {
