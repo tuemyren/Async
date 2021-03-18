@@ -28,7 +28,7 @@ namespace AsyncKata1
 
         private async void CrashCommandExecute(object obj)
         {
-            Task t, t2, all;
+            Task t, t2, all = null;
             try
             {
                 t = JobThatThrows();
@@ -36,14 +36,18 @@ namespace AsyncKata1
                 all = Task.WhenAll(t2, t);
                 await all;
             }
-            catch (AggregateException ae)
+            catch
             {
-                Console.WriteLine(ae);
-                Console.WriteLine(ae.Message);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
+                all?.Exception?.Handle(ex =>
+                {
+                    if (ex is NotSupportedException)
+                    {
+                        Console.WriteLine(ex);
+                        return true;
+                    }
+
+                    return false;
+                });
             }
         }
 
