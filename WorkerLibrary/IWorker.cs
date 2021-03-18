@@ -7,16 +7,16 @@ namespace WorkerLibrary
 {
     public interface IWorker
     {
-        Task<string> DoWork(CancellationToken cancellationToken);
+        Task<string> DoWork(CancellationToken cancellationToken, int ms = 500);
     }
 
     public class Worker : IWorker
     {
-        public async Task<string> DoWork(CancellationToken cancellationToken)
+        public async Task<string> DoWork(CancellationToken cancellationToken, int ms)
         {
-            return await BackgroundWorker(cancellationToken).ConfigureAwait(true);
+            return await BackgroundWorker(cancellationToken, ms).ConfigureAwait(true);
         }
-        private static Task<string> BackgroundWorker(CancellationToken cancellationToken)
+        private static Task<string> BackgroundWorker(CancellationToken cancellationToken, int ms)
         {
             return Task.Run(() =>
             {
@@ -28,7 +28,7 @@ namespace WorkerLibrary
                         return "Work cancelled!";
                     }
 
-                    Thread.Sleep(500);
+                    Thread.Sleep(ms);
                     count++;
                 }
 

@@ -14,7 +14,8 @@ namespace UnitTestProject
         {
             CancellationToken ct = new CancellationToken();
             Worker worker = new Worker();
-            Assert.AreEqual("Work Done!",  await worker.DoWork(ct));
+            Task<string> ts =  worker.DoWork(ct, 1);
+            Assert.AreEqual(TaskStatus.WaitingForActivation, ts);
         }
     }
 }
