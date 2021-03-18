@@ -8,7 +8,6 @@ WorkerLibrary/bin/*
 *.dll
 *.pdb
 .vs/AsyncKata1/DesignTimeBuild/.dtbcache
-
 UnitTestProject/obj/*
 UnitTestProject/bin/*
 packages/*
